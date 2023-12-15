@@ -14,7 +14,7 @@ stages{
                  }
                 steps{
                     sh 'echo "Hostname: `hostname` Date: `date`"'
-                    git 'https://github.com/Sonal0409/DevOpsCodeDemo.git'
+                    git 'https://github.com/jsinghjbd/DevOpsCodeDemo.git'
                 }
             }
             stage('GitCloneWorkerVM'){
@@ -23,7 +23,7 @@ stages{
                  }
                 steps{
                     sh 'echo "Hostname: `hostname` Date: `date`"'
-                    git 'https://github.com/Sonal0409/DevOpsCodeDemo.git'
+                    git 'https://github.com/jsinghjbd/DevOpsCodeDemo.git'
                 }
             }
         }
