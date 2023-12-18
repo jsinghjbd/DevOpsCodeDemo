@@ -1,25 +1,25 @@
 pipeline{
     tools{
-        maven 'Jenkins-Maven'
+        maven 'MyMaven'
     }
 agent{
-    label 'workervm'
+    label 'master'
 }
 stages{
     stage('1. CloneGitRepo'){
         parallel{
-             stage('GitCloneMasterVM'){
+             stage('GitCloneMaster'){
                  agent {
-                     label 'mastervm'
+                     label 'master'
                  }
                 steps{
                     sh 'echo "Hostname: `hostname` Date: `date`"'
                     git 'https://github.com/jsinghjbd/DevOpsCodeDemo.git'
                 }
             }
-            stage('GitCloneWorkerVM'){
+            stage('GitCloneWorker'){
                  agent {
-                     label 'workervm'
+                     label 'worker'
                  }
                 steps{
                     sh 'echo "Hostname: `hostname` Date: `date`"'
@@ -33,7 +33,7 @@ stages{
         parallel{
              stage('2. BuildCode'){
                  agent {
-                     label 'mastervm'
+                     label 'master'
                  }
                 steps{
                     sh 'sleep 15'
@@ -44,7 +44,7 @@ stages{
             }
             stage('3. ReviewCode'){
                 agent {
-                     label 'workervm'
+                     label 'worker'
                  }
                 steps{
                     sh 'sleep 15'
