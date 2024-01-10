@@ -3,14 +3,14 @@ pipeline{
         maven 'MyMaven'
     }
 agent{
-    label 'master'
+    label 'workernode1'
 }
 stages{
     stage('1. CloneGitRepo'){
         parallel{
              stage('GitCloneMaster'){
                  agent {
-                     label 'master'
+                     label 'workernode1'
                  }
                 steps{
                     sh 'echo "Hostname: `hostname` Date: `date`"'
@@ -19,7 +19,7 @@ stages{
             }
             stage('GitCloneWorker'){
                  agent {
-                     label 'worker'
+                     label 'workernode2'
                  }
                 steps{
                     sh 'echo "Hostname: `hostname` Date: `date`"'
@@ -33,7 +33,7 @@ stages{
         parallel{
              stage('2. BuildCode'){
                  agent {
-                     label 'master'
+                     label 'workernode1'
                  }
                 steps{
                     sh 'sleep 15'
@@ -44,7 +44,7 @@ stages{
             }
             stage('3. ReviewCode'){
                 agent {
-                     label 'worker'
+                     label 'workernode1'
                  }
                 steps{
                     sh 'sleep 15'
